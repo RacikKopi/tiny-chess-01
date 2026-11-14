@@ -8,19 +8,22 @@ A from-scratch chess engine for the make.fun tiny-chess-01 contest
 0x88 board, negamax with alpha-beta, quiescence search (captures,
 promotions, check replies), transposition table, two-slot killer moves,
 null-move pruning (R=2), and iterative deepening to a fixed budget of
-100,000 nodes per move — never a clock, so replays are deterministic.
+70,000 nodes per move — never a clock, so replays are deterministic.
 Evaluation is tapered (midgame/endgame piece-square tables) plus a
 bishop-pair bonus. Zobrist keys use a fixed seed.
 
-`main.py` is the whole engine (4,009 bytes as committed): an lzma +
+`main.py` is the whole engine (4,090 bytes as committed): an lzma +
 base85 payload with a small unpacker. It reads, imports, or executes no
 other file in this repository, and it makes no model calls.
 
 ## Results
 
-Practice trial-0 against the house gauntlet: **Elo 1,464**
-(4 wins, 1 draw, 3 losses). Perft verified on startpos, kiwipete,
-en-passant, castling/promotion, and two more positions.
+Practice trial-0 against the house gauntlet: **Elo 1,396**
+(3 wins, 2 draws, 3 losses) at 70,000 nodes per move. The first
+entry ran 100,000 nodes and scored Elo 0 on the server — its moves
+were too slow for the trial CPU — so the budget was cut to 70,000.
+Perft verified on startpos, kiwipete, en-passant,
+castling/promotion, and two more positions.
 
 ## Running it
 
